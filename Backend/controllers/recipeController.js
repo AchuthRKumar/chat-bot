@@ -1,4 +1,4 @@
-import { get_chroma_collection, retrieve_relevant_recipes, } from "./chromaUtils.js";
+import { initialize_pinecone_index, retrieve_relevant_recipes, get_pinecone_index } from "./pineconeUtils.js";
 import { generate_response } from "./generative.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import multer from 'multer';
@@ -31,7 +31,7 @@ const search_recipes = async (req, res) => {
             imageData = image.buffer.toString('base64');
         }
 
-        const collection = await get_chroma_collection();
+        const collection = await get_pinecone_index();
         const top_k = 2;
         
 

@@ -1,5 +1,5 @@
 import { extract_link, fetchAllRecipes } from "./recipeScraper.js";
-import { initialize_chroma_collection } from "./chromaUtils.js";
+import { initialize_pinecone_index } from "./pineconeUtils.js";
 const init = async () => {
     const links = await extract_link("https://www.andy-cooks.com/blogs/recipes/");
     if (!links || links.length === 0) {
@@ -7,7 +7,7 @@ const init = async () => {
         return;
     }
     const allRecipes = await fetchAllRecipes(links); 
-    await initialize_chroma_collection();
+    await initialize_pinecone_index();
     return;
 }
 
