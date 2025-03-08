@@ -5,7 +5,7 @@ import { SkeletonText } from "./ui/skeleton"
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
 import InputField from './InputField'
-import { Button } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react'
 import {
     DrawerActionTrigger,
     DrawerBackdrop,
@@ -88,63 +88,102 @@ const Home = () => {
             <DrawerRoot size="md">
                 <DrawerBackdrop />
                 <DrawerTrigger asChild>
-                    <Button size="sm">
+                    <Button 
+                        size="sm"
+                        bg="black"
+                        color="white"
+                        _hover={{ bg: 'gray.800' }}
+                        transition="all 0.2s"
+                    >
                         Chat Now
                     </Button>
                 </DrawerTrigger>
-                <DrawerContent bg="gray.50">
-                    <DrawerHeader>
-                        <DrawerTitle>Andy's Chat Bot</DrawerTitle>
+                <DrawerContent bg="white">
+                    <DrawerHeader borderBottom="1px solid" borderColor="gray.200">
+                        <DrawerTitle fontWeight="bold">Andy's Chat Bot</DrawerTitle>
                     </DrawerHeader>
-                    <DrawerBody bg="gray.50">
+                    <DrawerBody bg="white" py={4}>
                         <div>
                             <Box mb={4}>
-                                <Stack spacing={5} height="auto" >
+                                <Stack spacing={4} height="auto">
                                     {messages.map((msg, index) => (
                                         <Box
                                             key={index}
                                             alignSelf={msg.type === 'user' ? 'flex-end' : 'flex-start'}
-                                            p={3}
+                                            p={4}
                                             borderRadius="lg"
-                                            shadow="md"
-                                            background={msg.type === 'user' ? 'blue.100' : 'white'}
+                                            shadow="sm"
+                                            background={msg.type === 'user' ? '#F5F5F5' : 'white'}
                                             borderWidth="1px"
                                             borderColor="gray.200"
                                             width="auto"
                                             maxWidth="90%"
+                                            transition="all 0.2s"
+                                            _hover={{
+                                                shadow: 'md',
+                                                transform: 'translateY(-1px)'
+                                            }}
                                         >
                                             {msg.image && (
                                                 <Image
                                                     src={msg.image}
                                                     alt="Uploaded"
                                                     maxH="200px"
-                                                    mb={2}
+                                                    mb={3}
                                                     borderRadius="md"
                                                 />
                                             )}
-                                            {msg.type === 'bot' ? (
-                                                <ReactMarkdown>{msg.text}</ReactMarkdown>
-                                            ) : (
-                                                <Text color="gray.800">{msg.text}</Text>
-                                            )}
+                                            <Box mb={2}>
+                                                {msg.type === 'bot' ? (
+                                                    <ReactMarkdown>{msg.text}</ReactMarkdown>
+                                                ) : (
+                                                    <Text color="gray.800">{msg.text}</Text>
+                                                )}
+                                            </Box>
+                                            <Text
+                                                fontSize="xs"
+                                                color="gray.500"
+                                                textAlign={msg.type === 'user' ? 'right' : 'left'}
+                                            >
+                                                {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                            </Text>
                                         </Box>
                                     ))}
 
                                     {loading && (
-                                        <Box p={3} borderRadius="md" shadow="md" background="white" width="auto" maxWidth="90%">
-                                            <SkeletonText noOfLines={4} spacing="4" />
+                                        <Box
+                                            p={4}
+                                            borderRadius="lg"
+                                            shadow="sm"
+                                            background="white"
+                                            borderWidth="1px"
+                                            borderColor="gray.200"
+                                            width="auto"
+                                            maxWidth="90%"
+                                        >
+                                            <Box mb={2}>
+                                                <div className="typing-indicator">
+                                                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
+                                                </div>
+                                            </Box>
                                         </Box>
                                     )}
                                     <div ref={messageEndRef} />
-
                                 </Stack>
                             </Box>
                         </div>
                     </DrawerBody>
-                    <DrawerFooter >
+                    <DrawerFooter borderTop="1px solid" borderColor="gray.200" bg="gray.50">
                         <Stack width="100%">
                             {messages.length === 0 && (
-                                <Text fontStyle="italic" textAlign="center">
+                                <Text
+                                    fontStyle="italic"
+                                    textAlign="center"
+                                    color="gray.600"
+                                    fontSize="sm"
+                                >
                                     Hungry for something new? Ask me for a recipe!
                                 </Text>
                             )}
@@ -159,7 +198,13 @@ const Home = () => {
                             />
                         </Stack>
                     </DrawerFooter>
-                    <DrawerCloseTrigger color="black" />
+                    <DrawerCloseTrigger 
+                        position="absolute"
+                        right={4}
+                        top={4}
+                        color="black"
+                        _hover={{ color: 'gray.600' }}
+                    />
                 </DrawerContent>
             </DrawerRoot>
         </div>

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: process.env.EMBEDDING_MODEL});
+const model = genAI.getGenerativeModel({ model: process.env.EMBEDDING_MODEL });
 
 const generateEmbedding = async (text) => {
     const cleanText = text.trim();
@@ -36,18 +36,19 @@ const create_recipe_embeddings = async (recipes) => {
 
 const generate_response = async (query, relevant_recipes, model) => {
     const contextList = [];
+    console.log(relevant_recipes);
     const metadatas = relevant_recipes.metadatas[0];
+    console.log("metadatas", metadatas.title, metadatas.ingredients);
     const documents = relevant_recipes.documents[0];
+    console.log("documents", documents);
 
-    for (let i = 0; i < metadatas.length; i++) {
-        const metadata = metadatas[i];
-        const document = documents[i];
-        contextList.push(
-            `${metadata.title} - Ingredients: ${metadata.ingredients}\nInstructions: ${document}`
-        );
-    }
+    contextList.push(
+        `${metadatas.title} - Ingredients: ${metadatas.ingredients}\nInstructions: ${documents}`
+    );
+
 
     const context = contextList.join("\n");
+    console.log("context", context);
 
     const prompt = `
         Your name is Andys Chat Bot. Your goal is to use the provided context (retrieved from the RAG system) and the user’s query to craft a brief, approachable, and simple culinary response. As a professional chef, aim to provide a light, friendly, and easy-to-follow suggestion, with minimal complexity.
@@ -78,4 +79,4 @@ const generate_response = async (query, relevant_recipes, model) => {
     return result.response.text();
 }
 
-export {generateEmbedding, create_recipe_embeddings, generate_response};
+export { generateEmbedding, create_recipe_embeddings, generate_response };

@@ -45,14 +45,14 @@ const search_recipes = async (req, res) => {
             };
             const result = await model.generateContent([prompt, imagePart]);
             let image_prompt = result.response.text() + "\nCan you suggest some recipes based on the ingredients. Do not suggest anything outside the context provided. It is not necessary to include all the ingredients?";
-            console.log(image_prompt);
             const relevantRecipes = await retrieve_relevant_recipes(image_prompt, collection, top_k);
             response = await generate_response(image_prompt, relevantRecipes, model);
         } else {
             const relevantRecipes = await retrieve_relevant_recipes(prompt, collection, top_k);
             response = await generate_response(prompt, relevantRecipes, model);
         }
-
+        console.log("response", response);
+        console.log("Succesfully generated response");
         return res.json({ response });
     } catch (e) {
         console.error("Error in searchRecipes:", e);

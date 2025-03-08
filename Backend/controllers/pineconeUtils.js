@@ -33,7 +33,6 @@ const initialize_pinecone_index = async () => {
             metadata: {
                 title: recipes[index].title,
                 ingredients: recipes[index].ingredients.join(', '),
-                instructions: recipes[index].instructions
             }
         }));
 
