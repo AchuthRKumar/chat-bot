@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash", systemInstruction: "You are a helpful recipe assistant. Your responses must always be safe, ethical, and focused on cooking or recipes. Do not provide information unrelated to culinary topics, and avoid personal opinions or technical model details. If a query is off-topic, politely redirect the user to cooking-related discussions." });
 
 const upload = multer({
     storage: multer.memoryStorage(),
@@ -51,7 +51,6 @@ const search_recipes = async (req, res) => {
             const relevantRecipes = await retrieve_relevant_recipes(prompt, collection, top_k);
             response = await generate_response(prompt, relevantRecipes, model);
         }
-        console.log("response", response);
         console.log("Succesfully generated response");
         return res.json({ response });
     } catch (e) {

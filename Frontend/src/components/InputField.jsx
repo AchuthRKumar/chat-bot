@@ -1,14 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { Input, IconButton, Box, Flex, Text } from "@chakra-ui/react";
+import { Textarea, IconButton, Box, Flex, Text } from "@chakra-ui/react";
 import { Tooltip } from "../components/ui/tooltip"
 import { InputGroup } from "./ui/input-group"
 import { IoSend } from "react-icons/io5";
 import { BsFillCameraFill } from "react-icons/bs";
 import { CiSquareCheck } from "react-icons/ci";
+import '../styles/input-field.css';
 
 const InputField = ({ query, setQuery, handleInputChange, handleKeyPress, isLoading, onImageUpload, selectedImage }) => {
     const fileInputRef = useRef(null);
     const [isFocused, setIsFocused] = useState(false);
+    const textareaRef = useRef(null);
 
     const handleImageSelect = (e) => {
         const file = e.target.files[0];
@@ -23,43 +25,34 @@ const InputField = ({ query, setQuery, handleInputChange, handleKeyPress, isLoad
         }
     };
 
+    const handleTextareaKeyPress = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleKeyPress(e);
+        }
+    };
+
+    const adjustTextareaHeight = (e) => {
+        const textarea = e.target;
+        textarea.style.height = 'auto';
+        textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        handleInputChange(e);
+    };
+
     return (
         <Box width="100%">
             <Flex direction="column" gap={2}>
                 <Flex gap={2} align="center">
-                    <InputGroup 
-                        endElement={
-                            <Box
-                                as="button"
-                                onClick={handleSendClick}
-                                p={2}
-                                borderRadius="md"
-                                transition="all 0.2s"
-                                _hover={{ bg: 'gray.200' }}
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="center"
-                                disabled={isLoading || (!query.trim() && !selectedImage)}
-                                opacity={isLoading || (!query.trim() && !selectedImage) ? 0.5 : 1}
-                                position="absolute"
-                                right="6px"
-                                top="50%"
-                                transform="translateY(-50%)"
-                                zIndex="1"
-                            >
-                                <IoSend size="20px" color="#000000" />
-                            </Box>
-                        } 
-                        flex={1}
-                        position="relative"
-                    >
-                        <Input
+                    <Box position="relative" flex={1}>
+                        <Textarea
+                            ref={textareaRef}
+                            className="chat-textarea"
                             placeholder="Tell me what you're in the mood for…"
                             size="lg"
                             variant="outline"
                             value={query}
-                            onChange={(e) => handleInputChange(e)}
-                            onKeyDown={handleKeyPress}
+                            onChange={adjustTextareaHeight}
+                            onKeyDown={handleTextareaKeyPress}
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                             isLoading={isLoading}
@@ -71,15 +64,18 @@ const InputField = ({ query, setQuery, handleInputChange, handleKeyPress, isLoad
                                 borderColor: 'black',
                                 boxShadow: 'none'
                             }}
-                            transition="all 0.2s"
-                            paddingRight="48px"
-                            sx={{
-                                '&': {
-                                    paddingRight: '48px !important'
-                                }
-                            }}
+                            rows={1}
                         />
-                    </InputGroup>
+                        <Box
+                            as="button"
+                            className="send-button"
+                            onClick={handleSendClick}
+                            disabled={isLoading || (!query.trim() && !selectedImage)}
+                            opacity={isLoading || (!query.trim() && !selectedImage) ? 0.5 : 1}
+                        >
+                            <IoSend size="18px" color="#000000" />
+                        </Box>
+                    </Box>
                     <input
                         type="file"
                         accept="image/*"
@@ -90,20 +86,14 @@ const InputField = ({ query, setQuery, handleInputChange, handleKeyPress, isLoad
                     <Tooltip content={selectedImage ? "Image selected" : "Upload an image"}>
                         <Box
                             as="button"
+                            className="upload-button"
                             onClick={() => fileInputRef.current.click()}
-                            p={2}
-                            borderRadius="md"
-                            transition="all 0.2s"
-                            _hover={{ bg: 'gray.200' }}
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
                             color={selectedImage ? "green.500" : "black"}
                         >
                             {selectedImage ? (
-                                <CiSquareCheck size="24px" />
+                                <CiSquareCheck size="22px" />
                             ) : (
-                                <BsFillCameraFill size="20px" />
+                                <BsFillCameraFill size="22px" />
                             )}
                         </Box>
                     </Tooltip>
