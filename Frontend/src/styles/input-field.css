@@ -73,4 +73,51 @@
 
 .upload-button:focus {
     outline: none;
+}
+
+.image-preview-container {
+    margin-top: 8px;
+    padding: 8px;
+    background: #F7FAFC;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.preview-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.image-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.image-name {
+    font-size: 14px;
+    color: #1A202C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cancel-button {
+    padding: 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    cursor: pointer;
+    color: #4A5568;
+}
+
+.cancel-button:hover {
+    background: #E2E8F0;
+    color: #1A202C;
 } 

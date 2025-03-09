@@ -1,27 +1,39 @@
 import React, { useRef, useState } from 'react';
-import { Textarea, IconButton, Box, Flex, Text } from "@chakra-ui/react";
+import { Textarea, IconButton, Box, Flex, Text, Image } from "@chakra-ui/react";
 import { Tooltip } from "../components/ui/tooltip"
 import { InputGroup } from "./ui/input-group"
 import { IoSend } from "react-icons/io5";
 import { BsFillCameraFill } from "react-icons/bs";
 import { CiSquareCheck } from "react-icons/ci";
+import { IoClose } from "react-icons/io5";
 import '../styles/input-field.css';
 
 const InputField = ({ query, setQuery, handleInputChange, handleKeyPress, isLoading, onImageUpload, selectedImage }) => {
     const fileInputRef = useRef(null);
     const [isFocused, setIsFocused] = useState(false);
     const textareaRef = useRef(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
 
     const handleImageSelect = (e) => {
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
             onImageUpload(file);
+            setPreviewUrl(URL.createObjectURL(file));
+        }
+    };
+
+    const handleCancelImage = () => {
+        onImageUpload(null);
+        setPreviewUrl(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
         }
     };
 
     const handleSendClick = () => {
         if (query.trim() !== '' || selectedImage) {
             handleKeyPress({ key: 'Enter' });
+            setPreviewUrl(null);
         }
     };
 
@@ -29,6 +41,7 @@ const InputField = ({ query, setQuery, handleInputChange, handleKeyPress, isLoad
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             handleKeyPress(e);
+            setPreviewUrl(null);
         }
     };
 
@@ -42,12 +55,35 @@ const InputField = ({ query, setQuery, handleInputChange, handleKeyPress, isLoad
     return (
         <Box width="100%">
             <Flex direction="column" gap={2}>
+                {selectedImage && previewUrl && (
+                    <div className="image-preview-container">
+                        <Image
+                            src={previewUrl}
+                            alt="Preview"
+                            className="preview-image"
+                        />
+                        <div className="image-info">
+                            <Text className="image-name">{selectedImage.name}</Text>
+                            <Text fontSize="xs" color="gray.500">
+                                {(selectedImage.size / 1024).toFixed(1)} KB
+                            </Text>
+                        </div>
+                        <Box
+                            as="button"
+                            className="cancel-button"
+                            onClick={handleCancelImage}
+                            title="Remove image"
+                        >
+                            <IoClose size="20px" />
+                        </Box>
+                    </div>
+                )}
                 <Flex gap={2} align="center">
                     <Box position="relative" flex={1}>
                         <Textarea
                             ref={textareaRef}
                             className="chat-textarea"
-                            placeholder="Tell me what you're in the mood for…"
+                            placeholder="Hungry for something special?"
                             size="lg"
                             variant="outline"
                             value={query}
