@@ -31,7 +31,7 @@ const extract_link = async (baseUrl) => {
 
       if (newLinks.length === 0) {
         console.log(`No more links found at page ${page}. Stopping.`);
-        hasMoreContent = false; // Stop if no new links are found
+        hasMoreContent = false; 
       } else {
         allLinks = allLinks.concat(newLinks);
       }

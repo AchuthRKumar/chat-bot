@@ -84,16 +84,26 @@ const Home = () => {
 
 
     return (
-        <div>
+        <Box 
+            width="100vw" 
+            height="100vh" 
+            display="flex" 
+            alignItems="center" 
+            justifyContent="center"
+        >
             <DrawerRoot size="md">
                 <DrawerBackdrop />
                 <DrawerTrigger asChild>
                     <Button 
-                        size="sm"
+                        size="lg"
                         bg="black"
                         color="white"
                         _hover={{ bg: 'gray.800' }}
                         transition="all 0.2s"
+                        px={8}
+                        py={6}
+                        fontSize="lg"
+                        fontWeight="medium"
                     >
                         Chat Now
                     </Button>
@@ -176,7 +186,7 @@ const Home = () => {
                         </div>
                     </DrawerBody>
                     <DrawerFooter borderTop="1px solid" borderColor="gray.200" bg="gray.50">
-                        <Stack width="100%">
+                        <Stack width="100%" spacing={3}>
                             {messages.length === 0 && (
                                 <Text
                                     fontStyle="italic"
@@ -207,7 +217,7 @@ const Home = () => {
                     />
                 </DrawerContent>
             </DrawerRoot>
-        </div>
+        </Box>
     );
 }
 
