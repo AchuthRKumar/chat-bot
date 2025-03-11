@@ -74,6 +74,7 @@ const initialize_pinecone_index = async () => {
                 metadata: {
                     title: recipe.title,
                     ingredients: recipe.ingredients.join(', '),
+                    instructions: recipe.instructions
                 }
             };
         });
@@ -141,6 +142,7 @@ const update_pinecone_with_recipe = async (newRecipe) => {
             metadata: {
                 title: newRecipe.title,
                 ingredients: newRecipe.ingredients.join(', '),
+                instructions: newRecipe.instructions
             }
         }]);
 

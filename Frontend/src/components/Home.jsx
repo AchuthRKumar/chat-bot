@@ -50,7 +50,7 @@ const Home = () => {
         }
 
         try {
-            const response = await axios.post('https://chat-bot-rec7.onrender.com/api/v1/search', formData, {
+            const response = await axios.post('http://localhost:4000/api/v1/search', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
