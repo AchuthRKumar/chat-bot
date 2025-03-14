@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.post('/api/v1/search', upload.single('image'), search_recipes);
 router.post('/api/v1/update', init);
-
+router.get('/api/v1/ping', (req, res) =>{
+    res.status(200).send('pong');
+})
 export default router;
 
