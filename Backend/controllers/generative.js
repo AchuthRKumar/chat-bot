@@ -35,11 +35,11 @@ const create_recipe_embeddings = async (recipes) => {
 
 const generate_response = async (query, relevant_recipes) => {
     const contextList = [];
-    
+
     for (let i = 0; i < relevant_recipes.metadatas.length; i++) {
         const metadatas = relevant_recipes.metadatas[i];
         const documents = relevant_recipes.documents[i];
-        
+
         contextList.push(
             `Recipe ${i + 1}:\n${metadatas.title} - Ingredients: ${metadatas.ingredients}\nInstructions: ${documents}`
         );
@@ -79,11 +79,12 @@ const generate_response = async (query, relevant_recipes) => {
         Your role is to be a helpful recipe assistant, sticking strictly to culinary topics from context data, avoiding unrelated discussions, and making users feel at ease. If they want more, they can ask!
   `;
 
-    const result = await genAI.models.generateContent({
+    const result = await genAI.models.generateContentStream({
         model: "gemini-2.5-flash",
         contents: prompt
     })
-    return result.text;
+    
+    return result;
 }
 
 export { generateEmbedding, create_recipe_embeddings, generate_response };

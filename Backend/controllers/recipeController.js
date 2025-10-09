@@ -33,8 +33,8 @@ const search_recipes = async (req, res) => {
         const collection = await get_pinecone_index();
         const top_k = 2;
 
+        let final_prompt = prompt;
 
-        let response;
         if (imageData) {
             const imagePart = {
                 inlineData: {
@@ -42,7 +42,6 @@ const search_recipes = async (req, res) => {
                     mimeType: image.mimetype
                 }
             };
-            // [prompt, imagePart]
             const result = await genAI.models.generateContent({
                 model: "gemini-2.5-flash",
                 contents: [prompt, imagePart],
@@ -51,15 +50,18 @@ const search_recipes = async (req, res) => {
                 },
 
             });
-            let image_prompt = result.text + "\nCan you suggest some recipes based on the ingredients. Do not suggest anything outside the context provided. It is not necessary to include all the ingredients?";
-            const relevantRecipes = await retrieve_relevant_recipes(image_prompt, collection, top_k);
-            response = await generate_response(image_prompt, relevantRecipes);
-        } else {
-            const relevantRecipes = await retrieve_relevant_recipes(prompt, collection, top_k);
-            response = await generate_response(prompt, relevantRecipes);
+            final_prompt = result.text + "\nCan you suggest some recipes based on the ingredients. Do not suggest anything outside the context provided. It is not necessary to include all the ingredients?";
         }
-        console.log("Succesfully generated response");
-        return res.json({ response });
+        const relevantRecipes = await retrieve_relevant_recipes(final_prompt, collection, top_k);
+        console.log(relevantRecipes);
+        let response = await generate_response(final_prompt, relevantRecipes);
+
+        for await (const chunk of response) {
+            res.write(chunk.text) 
+        }
+
+        console.log("Successfully streamed response");
+        res.end();
     } catch (e) {
         console.error("Error in searchRecipes:", e);
         return res.status(500).json({ error: "An error occurred" });
