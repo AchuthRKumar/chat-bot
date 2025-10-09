@@ -1,10 +1,9 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: process.env.EMBEDDING_MODEL });
+const genAI = new GoogleGenAI(process.env.GEMINI_API_KEY);
 
 const generateEmbedding = async (text) => {
     const cleanText = text.trim();
@@ -12,12 +11,12 @@ const generateEmbedding = async (text) => {
         const content = {
             parts: [{ text: cleanText }]
         };
-        const response = await model.embedContent({
-            content: content,
-            taskType: "retrieval_document",
-            title: "Recipe Retrieval"
+        const response = await genAI.models.embedContent({
+            model: "gemini-embedding-001",
+            contents: content,
+            config: { outputDimensionality: 768 },
         });
-        return response.embedding.values;
+        return response.embeddings[0].values;
     } catch (error) {
         console.error("Error generating embedding:", error);
         throw error;
@@ -34,7 +33,7 @@ const create_recipe_embeddings = async (recipes) => {
     return embeddings;
 }
 
-const generate_response = async (query, relevant_recipes, model) => {
+const generate_response = async (query, relevant_recipes) => {
     const contextList = [];
     
     for (let i = 0; i < relevant_recipes.metadatas.length; i++) {
@@ -80,8 +79,11 @@ const generate_response = async (query, relevant_recipes, model) => {
         Your role is to be a helpful recipe assistant, sticking strictly to culinary topics from context data, avoiding unrelated discussions, and making users feel at ease. If they want more, they can ask!
   `;
 
-    const result = await model.generateContent(prompt);
-    return result.response.text();
+    const result = await genAI.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: prompt
+    })
+    return result.text;
 }
 
 export { generateEmbedding, create_recipe_embeddings, generate_response };

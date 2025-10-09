@@ -18,7 +18,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@google/generative-ai": "^0.22.0",
+    "@google/genai": "^1.23.0",
     "@pinecone-database/pinecone": "^5.1.1",
     "axios": "^1.8.1",
     "cheerio": "^1.0.0",

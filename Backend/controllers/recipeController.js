@@ -1,17 +1,16 @@
 import { initialize_pinecone_index, retrieve_relevant_recipes, get_pinecone_index } from "./pineconeUtils.js";
 import { generate_response } from "./generative.js";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import multer from 'multer';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash", systemInstruction: "You are a helpful recipe assistant. Your responses must always be safe, ethical, and focused on cooking or recipes. Do not provide information unrelated to culinary topics, and avoid personal opinions or technical model details. If a query is off-topic, politely redirect the user to cooking-related discussions." });
+const genAI = new GoogleGenAI(process.env.GEMINI_API_KEY);
 
 const upload = multer({
     storage: multer.memoryStorage(),
     limits: {
-        fileSize: 5 * 1024 * 1024 
+        fileSize: 5 * 1024 * 1024
     }
 });
 
@@ -33,7 +32,7 @@ const search_recipes = async (req, res) => {
 
         const collection = await get_pinecone_index();
         const top_k = 2;
-        
+
 
         let response;
         if (imageData) {
@@ -43,13 +42,21 @@ const search_recipes = async (req, res) => {
                     mimeType: image.mimetype
                 }
             };
-            const result = await model.generateContent([prompt, imagePart]);
-            let image_prompt = result.response.text() + "\nCan you suggest some recipes based on the ingredients. Do not suggest anything outside the context provided. It is not necessary to include all the ingredients?";
+            // [prompt, imagePart]
+            const result = await genAI.models.generateContent({
+                model: "gemini-2.5-flash",
+                contents: [prompt, imagePart],
+                config: {
+                    systemInstruction: "You are a helpful recipe assistant. Your responses must always be safe, ethical, and focused on cooking or recipes. Do not provide information unrelated to culinary topics, and avoid personal opinions or technical model details. If a query is off-topic, politely redirect the user to cooking-related discussions.",
+                },
+
+            });
+            let image_prompt = result.text + "\nCan you suggest some recipes based on the ingredients. Do not suggest anything outside the context provided. It is not necessary to include all the ingredients?";
             const relevantRecipes = await retrieve_relevant_recipes(image_prompt, collection, top_k);
-            response = await generate_response(image_prompt, relevantRecipes, model);
+            response = await generate_response(image_prompt, relevantRecipes);
         } else {
             const relevantRecipes = await retrieve_relevant_recipes(prompt, collection, top_k);
-            response = await generate_response(prompt, relevantRecipes, model);
+            response = await generate_response(prompt, relevantRecipes);
         }
         console.log("Succesfully generated response");
         return res.json({ response });
