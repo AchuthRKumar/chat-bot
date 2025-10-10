@@ -1,37 +1,40 @@
 import { GoogleGenAI } from "@google/genai";
+import { pipeline } from "@xenova/transformers";
 import dotenv from 'dotenv';
 
 dotenv.config();
 
+class EmbeddingPipeline {
+    static task = 'feature-extraction';
+    static model = 'Xenova/all-MiniLM-L6-v2';
+    static instance = null;
+
+    static async getInstance(progress_callback = null) {
+        if (this.instance === null) {
+            console.log("Loading local embedding model for the first time...");
+            this.instance = await pipeline(this.task, this.model, { progress_callback });
+            console.log("Local embedding model loaded successfully.");
+        }
+        return this.instance;
+    }
+}
+
+const generateSingleEmbedding = async (text) => {
+    const embedder = await EmbeddingPipeline.getInstance();
+    const result = await embedder(text.trim(), { pooling: 'mean', normalize: true });
+    return Array.from(result.data);
+};
+
+
+const generateEmbeddingsBatch = async (texts) => {
+    const embedder = await EmbeddingPipeline.getInstance();
+    const cleanTexts = texts.map(t => t.trim());
+    
+    const results = await embedder(cleanTexts, { pooling: 'mean', normalize: true });
+    return results.tolist();
+};
+
 const genAI = new GoogleGenAI(process.env.GEMINI_API_KEY);
-
-const generateEmbedding = async (text) => {
-    const cleanText = text.trim();
-    try {
-        const content = {
-            parts: [{ text: cleanText }]
-        };
-        const response = await genAI.models.embedContent({
-            model: "gemini-embedding-001",
-            contents: content,
-            config: { outputDimensionality: 768 },
-        });
-        return response.embeddings[0].values;
-    } catch (error) {
-        console.error("Error generating embedding:", error);
-        throw error;
-    }
-}
-
-const create_recipe_embeddings = async (recipes) => {
-    const embeddings = {};
-    for (let i = 0; i < recipes.length; i++) {
-        const recipe = recipes[i];
-        const textToEmbed = `${recipe.title} Ingredients: ${recipe.ingredients.join(', ')}`;
-        embeddings[`recipe${i}`] = await generateEmbedding(textToEmbed);
-    }
-    return embeddings;
-}
 
 const generate_response = async (query, relevant_recipes) => {
     const contextList = [];
@@ -87,4 +90,4 @@ const generate_response = async (query, relevant_recipes) => {
     return result;
 }
 
-export { generateEmbedding, create_recipe_embeddings, generate_response };
+export { generateSingleEmbedding, generateEmbeddingsBatch, generate_response };
