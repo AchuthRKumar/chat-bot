@@ -81,7 +81,6 @@ const generate_response = async (query, relevant_recipes) => {
 
         Your role is to be a helpful recipe assistant, sticking strictly to culinary topics from context data, avoiding unrelated discussions, and making users feel at ease. If they want more, they can ask!
   `;
-
     const result = await genAI.models.generateContentStream({
         model: "gemini-2.5-flash",
         contents: prompt
@@ -90,4 +89,4 @@ const generate_response = async (query, relevant_recipes) => {
     return result;
 }
 
-export { generateSingleEmbedding, generateEmbeddingsBatch, generate_response };
+export { generateSingleEmbedding, generateEmbeddingsBatch, generate_response, EmbeddingPipeline };

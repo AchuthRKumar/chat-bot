@@ -53,7 +53,6 @@ const search_recipes = async (req, res) => {
             final_prompt = result.text + "\nCan you suggest some recipes based on the ingredients. Do not suggest anything outside the context provided. It is not necessary to include all the ingredients?";
         }
         const relevantRecipes = await retrieve_relevant_recipes(final_prompt, collection, top_k);
-        console.log(relevantRecipes);
         let response = await generate_response(final_prompt, relevantRecipes);
 
         for await (const chunk of response) {
