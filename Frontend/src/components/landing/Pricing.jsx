@@ -1,33 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react'; // Removed useState as the toggle is gone
 import { FiCheckCircle } from 'react-icons/fi';
 
 const Pricing = () => {
-  const [isAnnual, setIsAnnual] = useState(false);
-
+  // The isAnnual state and toggle have been removed for clarity.
   return (
-    <section id="pricing" className="py-20">
+    <section id="pricing" className="py-20 bg-gray-50"> {/* Added background for visual separation */}
       <div className="container mx-auto px-6">
-        {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">A Plan for Every Ambition</h2>
+          {/* REVISED: Wording is more direct and personal */}
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-            Choose a starting point for our conversation. All plans are fully customized to your needs.
+            These tiers are designed as a starting point for our conversation. Every solution I build is fully customized to your specific needs.
           </p>
         </div>
 
-        {/* Annual/Monthly Toggle */}
-        <div className="flex justify-center items-center gap-4 mb-10">
-          <span className={`font-medium ${!isAnnual ? 'text-indigo-600' : 'text-gray-500'}`}>Monthly</span>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" checked={isAnnual} onChange={() => setIsAnnual(!isAnnual)} className="sr-only peer" />
-            <div className="w-14 h-7 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
-          </label>
-          <span className={`font-medium ${isAnnual ? 'text-indigo-600' : 'text-gray-500'}`}>
-            Annually <span className="text-sm text-green-500">(Save up to 20%)</span>
-          </span>
-        </div>
-
-        {/* Pricing Tiers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Tier 1: LaunchPad */}
           <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200 flex flex-col">
@@ -62,9 +48,8 @@ const Pricing = () => {
             <h3 className="text-2xl font-bold text-gray-800">Enterprise</h3>
             <p className="mt-2 text-gray-500">For complex, mission-critical AI solutions.</p>
             <ul className="mt-6 space-y-4 text-gray-600 flex-grow">
-              <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Fully bespoke AI capabilities (e.g., Virtual Try-On)</li>
-              <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Custom data pipelines & model tuning</li>
-              <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Dedicated account manager</li>
+              <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Advanced generative solutions (e.g., AI Virtual Try-On)</li>
+              <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Custom data pipelines & model tuning</li>              <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Direct one-on-one partnership and strategy with me</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Performance SLAs & advanced security</li>
             </ul>
             <a href="#contact" className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Book a Strategy Call</a>

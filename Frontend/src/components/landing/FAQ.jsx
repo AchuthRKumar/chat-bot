@@ -4,7 +4,7 @@ import { FiChevronDown } from 'react-icons/fi';
 const faqData = [
   {
     question: "How is your service different from a DIY chatbot platform?",
-    answer: "DIY platforms provide the tools; we provide the complete solution. We handle the entire process from strategy and development to integration and ongoing support. This saves you time, guarantees a professional result, and ensures the AI is perfectly tailored to solve your specific business challenges."
+    answer: "DIY platforms provide the tools; I provide the complete solution. I handle the entire process from strategy and development to integration and ongoing support. This saves you time, guarantees a professional result, and ensures the AI is perfectly tailored to solve your specific business challenges."
   },
   {
     question: "What kind of data can the AI be trained on?",
@@ -16,11 +16,11 @@ const faqData = [
   },
   {
     question: "Can the chatbot's appearance be customized to match my brand?",
-    answer: "Absolutely. We ensure the chatbot's interface, colors, fonts, and icons are all styled to seamlessly integrate with your website's existing design for a consistent and professional user experience."
+    answer: "Absolutely. I ensure the chatbot's interface, colors, fonts, and icons are all styled to seamlessly integrate with your website's existing design for a consistent and professional user experience."
   },
   {
     question: "What does 'ongoing support' include?",
-    answer: "Our partnership continues after launch. We provide technical support, monitor the AI's performance, and offer strategic advice for improvements. As your business evolves, we help ensure your AI assistant evolves with it."
+    answer: "My partnership with you continues after launch. I provide technical support, monitor the AI's performance, and offer strategic advice for improvements. As your business evolves, I help ensure your AI assistant evolves with it."
   }
 ];
 
@@ -58,8 +58,9 @@ const FAQ = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">Frequently Asked Questions</h2>
+          {/* Minor tweak for consistency */}
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-            Have questions? We've got answers. If you don't find what you're looking for, feel free to contact us.
+            Have questions? I've got answers. If you don't find what you're looking for, feel free to contact me.
           </p>
         </div>
 

@@ -16,7 +16,7 @@ const Navbar = () => {
           <li><a href="#features" className={linkClasses}>Features</a></li>
           <li><a href="#how-it-works" className={linkClasses}>How It Works</a></li>
           <li><a href="#pricing" className={linkClasses}>Pricing</a></li>
-          <li><a href="#contact" className={linkClasses}>Contact Us</a></li>
+          <li><a href="#contact" className={linkClasses}>Contact</a></li>
         </ul>
 
         {/* Mobile Menu Button (Optional, but good for future) */}
