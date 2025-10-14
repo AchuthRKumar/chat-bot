@@ -4,14 +4,13 @@ import ChatInput from './ChatInput';
 import TypingIndicator from './TypingIndicator';
 import { IoClose } from "react-icons/io5";
 
-const ChatInterface = () => {
-    // All your existing state and logic is perfect and remains here
-    const [messages, setMessages] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [query, setQuery] = useState('');
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [isExpanded, setIsExpanded] = useState(false);
-    const interfaceRef = useRef(null);
+// 1. Accept the new isVisible prop
+const ChatInterface = ({ isExpanded, setIsExpanded, isVisible }) => {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+  const interfaceRef = useRef(null);
 
     const handleSendMessage = async () => {
         if (!query.trim() && !selectedImage) return;
@@ -50,58 +49,51 @@ const ChatInterface = () => {
 
     // This effect handles clicks outside the component to collapse it
     useEffect(() => {
-        function handleClickOutside(event) {
-            if (interfaceRef.current && !interfaceRef.current.contains(event.target)) {
-                setIsExpanded(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+    function handleClickOutside(event) {
+    if (interfaceRef.current && !interfaceRef.current.contains(event.target)) {
+    setIsExpanded(false);
+    }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [interfaceRef]);
 
-
     return (
-        // The main container that animates its height
-        <div 
-            ref={interfaceRef}
-            className={`
-                fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl
-                bg-[#1E1F22] border border-gray-700/80 rouned-lg shadow-2xl
-                flex flex-col transition-all duration-300 ease-in-out z-50
-                ${isExpanded ? 'h-[80vh]' : 'h-auto'}
-            `}
-        >
-            {/* The Header is only rendered when expanded */}
-            {isExpanded && (
-                <div className="p-4 flex justify-between items-center text-white border-b border-gray-700/80">
-                    <h1 className="text-lg font-semibold">Recipe Bot</h1>
-                    <button onClick={() => setIsExpanded(false)} className="p-1 hover:bg-gray-700 rounded-full">
-                        <IoClose size={24} />
-                    </button>
-                </div>
-            )}
-            
-            {/* The Message area is only rendered when expanded */}
-            {isExpanded && (
-                 <div className="flex-1 flex flex-col-reverse overflow-y-auto bg-black/20 p-2">
-                    {loading && <TypingIndicator />}
-                    <MessageList messages={messages} />
-                </div>
-            )}
-            
-            {/* The ChatInput is ALWAYS rendered at the bottom. It triggers the expansion. */}
-            <div onFocus={() => setIsExpanded(true)} className='rounded-lg'>
-                <ChatInput
-                    query={query}
-                    setQuery={setQuery}
-                    handleSendMessage={handleSendMessage}
-                    selectedImage={selectedImage}
-                    setSelectedImage={setSelectedImage}
-                    isLoading={loading}
-                />
-            </div>
+        <div
+      ref={interfaceRef}
+      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl bg-[#1E1F22] border border-gray-700/80 shadow-2xl flex flex-col z-50 
+                 transition-discrete  mb-5 
+                 ${isExpanded ? 'h-[80vh] rounded-t-xl' : 'h-auto rounded-full'}
+                 ${isVisible ? 'opacity-100 translate-y-0 ' : 'opacity-0 translate-y-full pointer-events-none'}`}
+    >
+      {isExpanded && (
+        <div className="p-4 flex justify-between items-center text-white border-b border-gray-700/80">
+          <h1 className="text-lg font-semibold">Recipe Bot</h1>
+          <button onClick={() => setIsExpanded(false)} className="p-1 hover:bg-gray-700 rounded-full">
+            <IoClose size={24} />
+          </button>
         </div>
-    );
+      )}
+
+      {isExpanded && (
+        <div className="flex-1 flex flex-col-reverse overflow-y-auto bg-black/20 p-2">
+          {loading && <TypingIndicator />}
+          <MessageList messages={messages} />
+        </div>
+      )}
+      
+      <div onFocus={() => setIsExpanded(true)} className='rounded-full'>
+        <ChatInput
+          query={query}
+          setQuery={setQuery}
+          handleSendMessage={handleSendMessage}
+          selectedImage={selectedImage}
+          setSelectedImage={setSelectedImage}
+          isLoading={loading}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default ChatInterface;

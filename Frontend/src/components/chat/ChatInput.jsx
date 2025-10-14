@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { IoAddCircleOutline, IoSend, IoClose } from "react-icons/io5";
 
 const ChatInput = ({ query, setQuery, handleSendMessage, selectedImage, setSelectedImage, isLoading }) => {
     const fileInputRef = useRef(null);
@@ -35,18 +34,21 @@ const ChatInput = ({ query, setQuery, handleSendMessage, selectedImage, setSelec
     };
 
     return (
-        <div className="p-4 bg-[#1E1F22]">
+        <div className="p-3 bg-[#1E1F22] rounded-full">
             {previewUrl && (
                 <div className="relative w-20 h-20 mb-2 p-1 border border-gray-600 rounded-lg">
                     <img src={previewUrl} alt="Preview" className="w-full h-full object-cover rounded" />
-                    <button onClick={handleCancelImage} className="absolute top-0 right-0 -m-2 bg-gray-900 text-white rounded-full p-1"><IoClose size={14} /></button>
+                    <button onClick={handleCancelImage} className="absolute top-0 right-0 -m-2 bg-gray-900 text-white rounded-full p-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                    </button>
                 </div>
             )}
-            <div className="flex items-center gap-2 p-2 bg-black/30 border border-gray-700/80 rounded-full">
+            <div className="flex items-center gap-2 p-1 rounded-full">
                 <textarea
                     ref={textareaRef}
-                    className="flex-1 bg-transparent text-lg pl-4 text-gray-200 placeholder-gray-500 resize-none focus:outline-none"
-                    placeholder="I am full of recipes..."
+                    className="flex-1 bg-transparent text-sm pl-4 text-gray-200 placeholder-gray-300 resize-none focus:outline-none"
+                    placeholder="Try the recipe chat bot now..."
                     value={query}
                     onChange={adjustTextareaHeight}
                     onKeyDown={handleTextareaKeyPress}
@@ -61,7 +63,7 @@ const ChatInput = ({ query, setQuery, handleSendMessage, selectedImage, setSelec
                 <button
                     onClick={handleSendMessage}
                     disabled={isLoading || (!query.trim() && !selectedImage)}
-                    className="p-2 text-white bg-gray-600 rounded-full disabled:opacity-50 transition-all"
+                    className="p-3 text-white bg-gray-600 rounded-full disabled:opacity-50 transition-all"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
