@@ -1,7 +1,7 @@
 import React from 'react'; // Removed useState as the toggle is gone
 import { FiCheckCircle } from 'react-icons/fi';
 
-const Pricing = () => {
+const Pricing = ({ onBookCallClick }) => {
   // The isAnnual state and toggle have been removed for clarity.
   return (
     <section id="pricing" className="py-20 bg-gray-50"> {/* Added background for visual separation */}
@@ -25,7 +25,7 @@ const Pricing = () => {
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Standard website integration</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Basic analytics</li>
             </ul>
-            <a href="#contact" className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Get a Custom Quote</a>
+            <button onClick={onBookCallClick} className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Get a Custom Quote</button>
           </div>
 
           {/* Tier 2: Growth Engine (Highlighted) */}
@@ -40,7 +40,7 @@ const Pricing = () => {
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Detailed analytics & reporting</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Priority support</li>
             </ul>
-            <a href="#contact" className="mt-8 block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition">Get a Custom Quote</a>
+            <button onClick={onBookCallClick} className="mt-8 block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition">Get a Custom Quote</button>
           </div>
 
           {/* Tier 3: Enterprise */}
@@ -52,7 +52,7 @@ const Pricing = () => {
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Custom data pipelines & model tuning</li>              <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Direct one-on-one partnership and strategy with me</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Performance SLAs & advanced security</li>
             </ul>
-            <a href="#contact" className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Book a Strategy Call</a>
+            <button onClick={onBookCallClick} className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Book a Free Call</button>
           </div>
         </div>
       </div>

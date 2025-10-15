@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 
-const CTA = () => {
+const CTA = ({ onBookCallClick}) => {
   return (
     <section id="cta" className="py-20 bg-indigo-600">
       <div className="container mx-auto px-6 text-center">
@@ -14,13 +14,13 @@ const CTA = () => {
         </p>
 
         <div className="mt-8">
-          <a
-            href="#contact"
+          <button
+            onClick={onBookCallClick}
             className="inline-flex items-center justify-center px-10 py-4 bg-white text-indigo-600 text-lg font-bold rounded-md shadow-lg hover:bg-gray-100 transition-transform transform hover:scale-105"
           >
-            Book Your Free Strategy Call
+            Book Your Free Call
             <FiChevronRight className="ml-2" />
-          </a>
+          </button>
 
           <div className="mt-4 flex items-center justify-center gap-2 text-sm text-indigo-200 opacity-80">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

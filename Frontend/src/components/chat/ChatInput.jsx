@@ -48,7 +48,7 @@ const ChatInput = ({ query, setQuery, handleSendMessage, selectedImage, setSelec
                 <textarea
                     ref={textareaRef}
                     className="flex-1 bg-transparent text-sm pl-4 text-gray-200 placeholder-gray-300 resize-none focus:outline-none"
-                    placeholder="Try the recipe chat bot now..."
+                    placeholder="Ask about recipes or ingredients..."
                     value={query}
                     onChange={adjustTextareaHeight}
                     onKeyDown={handleTextareaKeyPress}
@@ -63,7 +63,7 @@ const ChatInput = ({ query, setQuery, handleSendMessage, selectedImage, setSelec
                 <button
                     onClick={handleSendMessage}
                     disabled={isLoading || (!query.trim() && !selectedImage)}
-                    className="p-3 text-white bg-gray-600 rounded-full disabled:opacity-50 transition-all"
+                    className="p-3 text-white bg-gray-600 rounded-full disabled:opacity-50 transition-all duration-300 transform hover:scale-110"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />

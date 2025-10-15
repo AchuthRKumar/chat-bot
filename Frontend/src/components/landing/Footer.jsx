@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
 
                     <div className="col-span-1">
-                        <h2 className="text-2xl font-bold">YourBrand</h2>
+                        <h2 className="text-2xl font-bold">Vector Chat</h2>
                         <p className="mt-4 text-gray-400">
                             Building custom AI assistants to solve your unique business challenges.
                         </p>

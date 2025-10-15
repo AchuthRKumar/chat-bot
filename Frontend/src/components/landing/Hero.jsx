@@ -1,9 +1,9 @@
 import React from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 
-const Hero = ({ onTryBotClick }) => {
+const Hero = ({ onTryBotClick, onBookCallClick }) => {
     return (
-        <section id="hero" className="pt-24 pb-20"> 
+        <section id="hero" className="pt-24 pb-20">
             <div className="container mx-auto px-6 text-center">
                 <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 leading-tight">
                     Go Beyond Simple Chat. <br />
@@ -15,13 +15,13 @@ const Hero = ({ onTryBotClick }) => {
                 </p>
 
                 <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <a
-                        href="#contact"
+                    <button
+                        onClick={onBookCallClick} 
                         className="flex items-center justify-center px-8 py-3 bg-indigo-600 text-white text-lg font-medium rounded-md shadow-lg hover:bg-indigo-700 transition-transform transform hover:scale-105"
                     >
-                        Book a Free Strategy Call
+                        Book a Free Call
                         <FiChevronRight className="ml-2" />
-                    </a>
+                    </button>
                     <button
                         onClick={onTryBotClick}
                         className="flex items-center justify-center px-8 py-3 bg-white text-gray-700 text-lg font-medium rounded-md shadow-lg hover:bg-gray-100 transition-transform transform hover:scale-105 border border-gray-200"

@@ -61,10 +61,9 @@ const ChatInterface = ({ isExpanded, setIsExpanded, isVisible }) => {
     return (
         <div
       ref={interfaceRef}
-      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl bg-[#1E1F22] border border-gray-700/80 shadow-2xl flex flex-col z-50 
-                 transition-discrete  mb-5 
-                 ${isExpanded ? 'h-[80vh] rounded-t-xl' : 'h-auto rounded-full'}
-                 ${isVisible ? 'opacity-100 translate-y-0 ' : 'opacity-0 translate-y-full pointer-events-none'}`}
+      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl bg-[#1E1F22] border border-gray-700/80 shadow-2xl flex flex-col z-50 transition-[height,opacity,transform] duration-300 ease-in-out mb-5
+                 ${isExpanded ? 'h-[80vh] rounded-xl' : 'h-auto rounded-full'}
+                 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[calc(100%+20px)] pointer-events-none'}`}
     >
       {isExpanded && (
         <div className="p-4 flex justify-between items-center text-white border-b border-gray-700/80">
@@ -82,7 +81,7 @@ const ChatInterface = ({ isExpanded, setIsExpanded, isVisible }) => {
         </div>
       )}
       
-      <div onFocus={() => setIsExpanded(true)} className='rounded-full'>
+      <div onClick={() => setIsExpanded(true)}>
         <ChatInput
           query={query}
           setQuery={setQuery}

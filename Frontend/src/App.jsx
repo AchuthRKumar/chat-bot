@@ -10,9 +10,11 @@ import Pricing from './components/landing/Pricing.jsx';
 import FAQ from './components/landing/FAQ.jsx';
 import CTA from './components/landing/CTA.jsx';
 import Footer from './components/landing/Footer.jsx';
+import BookingForm from './components/landing/BookingForm.jsx';
 
 function App() {
   const [isChatExpanded, setIsChatExpanded] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   
   const [isChatBarVisible, setIsChatBarVisible] = useState(true);  
   const ctaRef = useRef(null);
@@ -40,21 +42,21 @@ function App() {
   }, []); 
 
   return (
-    <main className="h-screen overflow-y-auto w-screen font-sans">
+    <main className="h-screen overflow-y-auto w-screen no-scrollbar">
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] -z-10"></div>
 
-      <Navbar />
+      <Navbar onBookCallClick={() => setIsFormOpen(true)}/>
 
       <div className="relative z-10">
-        <Hero onTryBotClick={() => setIsChatExpanded(true)} />
+        <Hero onTryBotClick={() => setIsChatExpanded(true)} onBookCallClick={() => setIsFormOpen(true)} />
         <Features />
         <HowItWorks />
         <WhyChooseUs />
         <Commitment />
-        <Pricing />
+        <Pricing onBookCallClick={() => setIsFormOpen(true)}/>
         <FAQ />
         <div ref={ctaRef}>
-          <CTA />
+          <CTA onBookCallClick={() => setIsFormOpen(true)}/>
         </div>
         <Footer />
       </div>
@@ -64,6 +66,8 @@ function App() {
         setIsExpanded={setIsChatExpanded}
         isVisible={isChatBarVisible}
       />
+
+      <BookingForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </main>
   );
 }
