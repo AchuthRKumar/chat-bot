@@ -11,7 +11,6 @@ import FAQ from './components/landing/FAQ.jsx';
 import CTA from './components/landing/CTA.jsx';
 import Footer from './components/landing/Footer.jsx';
 import BookingForm from './components/landing/BookingForm.jsx';
-import { Analytics } from "@vercel/analytics/next"
 
 
 function App() {
@@ -70,7 +69,6 @@ function App() {
       />
 
       <BookingForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
-      <Analytics />
     </main>
   );
 }
