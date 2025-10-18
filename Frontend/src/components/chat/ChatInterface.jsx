@@ -62,7 +62,7 @@ const ChatInterface = ({ isExpanded, setIsExpanded, isVisible }) => {
         setSelectedImage(null);
 
         try {
-            const response = await fetch('http://localhost:4000/api/v1/search', { 
+            const response = await fetch('https://chat-bot-rec7.onrender.com/api/v1/search', { 
                 method: 'POST', 
                 headers: requestHeaders,
                 body: requestBody 
