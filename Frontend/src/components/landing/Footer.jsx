@@ -13,8 +13,8 @@ const Footer = () => {
                             Building custom AI assistants to solve your unique business challenges.
                         </p>
                         <div className="mt-6 flex space-x-4">
-                            <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition"><FiTwitter size={20} /></a>
-                            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition"><FiLinkedin size={20} /></a>
+                            <a href="https://x.com/achuth_rk" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition"><FiTwitter size={20} /></a>
+                            {/* <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition"><FiLinkedin size={20} /></a> */}
                         </div>
                     </div>
 

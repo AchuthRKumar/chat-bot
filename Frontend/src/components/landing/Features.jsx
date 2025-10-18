@@ -46,9 +46,9 @@ const Features = () => {
                 <h3 className="text-2xl font-bold text-gray-800">{feature.title}</h3>
               </div>
               <p className="text-gray-600 mb-6">{feature.description}</p>
-              <div className="bg-gray-100 rounded-md overflow-hidden">
+              {/* <div className="bg-gray-100 rounded-md overflow-hidden">
                 <img src={feature.screenshotUrl} alt={`${feature.title} screenshot`} className="w-full h-auto" />
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

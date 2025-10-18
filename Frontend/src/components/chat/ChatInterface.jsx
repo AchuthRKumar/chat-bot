@@ -4,15 +4,28 @@ import ChatInput from './ChatInput';
 import TypingIndicator from './TypingIndicator';
 import { IoClose } from "react-icons/io5";
 
+const initialMessage = {
+  type: 'intro', 
+  text: `
+Welcome to the Recipe Bot Demo!
+
+This is a sample chatbot with knowledge formed from a database of recipes from a famous Chef's website.
+
+**Here's what you can try:**
+
+*   **Ask for a recipe:**  
+    *"Can I get the recipe for Chicken Tikka Masala?"*
+
+*   **Get creative with an image:**  
+    Upload a photo of your ingredients, and I'll suggest a recipe you can cook!
+  `
+};
 const ChatInterface = ({ isExpanded, setIsExpanded, isVisible }) => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([initialMessage]);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   
-  // --- FIX: Use useRef instead of useState for the session ID ---
-  // A ref will hold the latest value without being affected by component re-renders
-  // and stale state issues inside async functions.
   const sessionIdRef = useRef(null); 
   
   const interfaceRef = useRef(null);
@@ -97,8 +110,7 @@ const ChatInterface = ({ isExpanded, setIsExpanded, isVisible }) => {
 
     const handleCloseChat = () => {
         setIsExpanded(false);
-        setMessages([]);
-        // --- FIX: Reset the ref's .current property when the chat is closed ---
+        setMessages([initialMessage]);
         sessionIdRef.current = null; 
         console.log("Chat closed and session has been reset.");
     };
