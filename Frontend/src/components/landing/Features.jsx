@@ -19,12 +19,12 @@ const features = [
     description: 'Deploy a 24/7 support agent that resolves queries, creates tickets, and guides users, freeing up your team for high-value interactions and complex problem-solving.',
     screenshotUrl: 'https://via.placeholder.com/400x300.png/E0E7FF/4F46E5?text=Support+Chat'
   },
-  {
-    icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" /></svg>,
-    title: 'A Solution Tailored to You',
-    description: 'I don\'t give you a box of tools; I build your solution for you. As your dedicated AI specialist, I work directly with you to understand your goals and integrate a perfectly-tuned AI assistant into your workflow.',
-    screenshotUrl: 'https://via.placeholder.com/400x300.png/E0E7FF/4F46E5?text=Custom+Integration+Plan'
-  }
+  // {
+  //   icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" /></svg>,
+  //   title: 'A Solution Tailored to You',
+  //   description: 'I don\'t give you a box of tools; I build your solution for you. As your dedicated AI specialist, I work directly with you to understand your goals and integrate a perfectly-tuned AI assistant into your workflow.',
+  //   screenshotUrl: 'https://via.placeholder.com/400x300.png/E0E7FF/4F46E5?text=Custom+Integration+Plan'
+  // }
 ];
 
 const Features = () => {
@@ -38,17 +38,14 @@ const Features = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
-            <div key={index} className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
+            <div key={index} className="bg-white p-8 rounded-lg shadow-md border border-gray-200 flex flex-col">
               <div className="flex items-center gap-4 mb-4">
                 {feature.icon}
                 <h3 className="text-2xl font-bold text-gray-800">{feature.title}</h3>
               </div>
-              <p className="text-gray-600 mb-6">{feature.description}</p>
-              {/* <div className="bg-gray-100 rounded-md overflow-hidden">
-                <img src={feature.screenshotUrl} alt={`${feature.title} screenshot`} className="w-full h-auto" />
-              </div> */}
+              <p className="text-gray-600 mb-6 flex-grow">{feature.description}</p>
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 
-const BookingForm = ({ isOpen, onClose }) => {
+const BookingForm = ({ isOpen, onClose, selectedTier }) => {
     const VITE_FORM_API = import.meta.env.VITE_FORM_API;
     if (!isOpen) return null;
 
@@ -26,6 +26,7 @@ const BookingForm = ({ isOpen, onClose }) => {
 
         const finalFormData = {
             ...formData,
+            selectedTier: selectedTier,
             access_key: VITE_FORM_API,
         };
 

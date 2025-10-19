@@ -19,13 +19,20 @@ const Pricing = ({ onBookCallClick }) => {
           <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200 flex flex-col">
             <h3 className="text-2xl font-bold text-gray-800">LaunchPad</h3>
             <p className="mt-2 text-gray-500">Perfect for startups and single-use case needs.</p>
+            <div className="mt-6">
+              <span className="text-4xl font-extrabold text-gray-800">$500</span>
+              <span className="text-lg font-medium text-gray-500"> one-time setup</span>
+            </div>
+            <div className="mt-1">
+              <span className="text-lg font-bold text-gray-700">+ monthly cost begins at $100 </span>
+            </div>
             <ul className="mt-6 space-y-4 text-gray-600 flex-grow">
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> One core AI function (e.g., Support Bot)</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Trained on your knowledge base</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Standard website integration</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Basic analytics</li>
             </ul>
-            <button onClick={onBookCallClick} className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Get a Custom Quote</button>
+            <button onClick={() => onBookCallClick('Launch Pad')} className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Get a Custom Quote</button>
           </div>
 
           {/* Tier 2: Growth Engine (Highlighted) */}
@@ -33,6 +40,13 @@ const Pricing = ({ onBookCallClick }) => {
             <span className="absolute top-0 -translate-y-1/2 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
             <h3 className="text-2xl font-bold text-gray-800">Growth Engine</h3>
             <p className="mt-2 text-gray-500">For businesses looking to scale with advanced AI.</p>
+            <div className="mt-6">
+              <span className="text-4xl font-extrabold text-gray-800">$750</span>
+              <span className="text-lg font-medium text-gray-500"> one-time setup</span>
+            </div>
+            <div className="mt-1">
+              <span className="text-lg font-bold text-gray-700">+ monthly cost begins at $150 </span>
+            </div>
             <ul className="mt-6 space-y-4 text-gray-600 flex-grow">
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Multiple AI functions (e.g., Support + Sales)</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Connect to custom databases & APIs</li>
@@ -40,7 +54,7 @@ const Pricing = ({ onBookCallClick }) => {
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Detailed analytics & reporting</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Priority support</li>
             </ul>
-            <button onClick={onBookCallClick} className="mt-8 block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition">Get a Custom Quote</button>
+            <button onClick={() => onBookCallClick('Growth Engine')} className="mt-8 block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition">Get a Custom Quote</button>
           </div>
 
           {/* Tier 3: Enterprise */}
@@ -52,7 +66,7 @@ const Pricing = ({ onBookCallClick }) => {
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Custom data pipelines & model tuning</li>              <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Direct one-on-one partnership and strategy with me</li>
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Performance SLAs & advanced security</li>
             </ul>
-            <button onClick={onBookCallClick} className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Book a Free Call</button>
+            <button onClick={() => onBookCallClick('Enterprise')} className="mt-8 block w-full text-center px-6 py-3 bg-gray-100 text-indigo-600 font-semibold rounded-md hover:bg-gray-200 transition">Book a Free Call</button>
           </div>
         </div>
       </div>
