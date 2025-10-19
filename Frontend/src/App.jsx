@@ -14,7 +14,7 @@ import BookingForm from './components/landing/BookingForm.jsx';
 
 function App() {
   const [isChatExpanded, setIsChatExpanded] = useState(false);
-  const [selectedTier, setSelectedTier] = useState(false);
+  const [selectedTier, setSelectedTier] = useState(null);
   
   const [isChatBarVisible, setIsChatBarVisible] = useState(true);  
   const ctaRef = useRef(null);
