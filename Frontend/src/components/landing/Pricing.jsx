@@ -20,11 +20,8 @@ const Pricing = ({ onBookCallClick }) => {
             <h3 className="text-2xl font-bold text-gray-800">LaunchPad</h3>
             <p className="mt-2 text-gray-500">Perfect for startups and single-use case needs.</p>
             <div className="mt-6">
-              <span className="text-4xl font-extrabold text-gray-800">$500</span>
-              <span className="text-lg font-medium text-gray-500"> one-time setup</span>
-            </div>
-            <div className="mt-1">
-              <span className="text-lg font-bold text-gray-700">+ monthly cost begins at $100 </span>
+              <span className="text-3xl font-extrabold text-gray-800">Begins at ₹1999</span>
+              <span className="text-lg font-medium text-gray-500">/ month</span>
             </div>
             <ul className="mt-6 space-y-4 text-gray-600 flex-grow">
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> One core AI function (e.g., Support Bot)</li>
@@ -41,11 +38,8 @@ const Pricing = ({ onBookCallClick }) => {
             <h3 className="text-2xl font-bold text-gray-800">Growth Engine</h3>
             <p className="mt-2 text-gray-500">For businesses looking to scale with advanced AI.</p>
             <div className="mt-6">
-              <span className="text-4xl font-extrabold text-gray-800">$750</span>
-              <span className="text-lg font-medium text-gray-500"> one-time setup</span>
-            </div>
-            <div className="mt-1">
-              <span className="text-lg font-bold text-gray-700">+ monthly cost begins at $150 </span>
+              <span className="text-3xl font-extrabold text-gray-800">Begins at ₹4499</span>
+              <span className="text-lg font-medium text-gray-500">/month</span>
             </div>
             <ul className="mt-6 space-y-4 text-gray-600 flex-grow">
               <li className="flex items-start"><FiCheckCircle className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" /> Multiple AI functions (e.g., Support + Sales)</li>
