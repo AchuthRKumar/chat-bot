@@ -10,6 +10,7 @@ import FAQ from './components/landing/FAQ.jsx';
 import CTA from './components/landing/CTA.jsx';
 import Footer from './components/landing/Footer.jsx';
 import BookingForm from './components/landing/BookingForm.jsx';
+import FreeDemo from './components/landing/FreeDemo.jsx';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
         <Features />
         <HowItWorks />
         <WhyChooseUs />
+        <FreeDemo />
         <Pricing onBookCallClick={handleBookCallClick}/>
         <FAQ />
         <div ref={ctaRef}>

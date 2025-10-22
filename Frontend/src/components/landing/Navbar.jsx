@@ -15,6 +15,7 @@ const Navbar = ({ onBookCallClick}) => {
         <ul className="hidden md:flex items-center space-x-8">
           <li><a href="#features" className={linkClasses}>Features</a></li>
           <li><a href="#how-it-works" className={linkClasses}>How It Works</a></li>
+          <li><a href="#free-demo" className={linkClasses}>Free Demo</a></li> 
           <li><a href="#pricing" className={linkClasses}>Pricing</a></li>
           <li><button onClick={onBookCallClick} className={linkClasses}>Contact</button></li>
         </ul>
